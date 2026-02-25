@@ -53,3 +53,13 @@ Every repository should include checks for:
 4. Secret scanning
 5. Dependency review (when app dependencies exist)
 6. Final status aggregation gate
+
+## 5) GitHub settings to enforce
+
+Recommended repository settings (aligned with GitHub best practices):
+
+- Enable branch protection for `main`.
+- Require pull requests before merging.
+- Require status checks to pass before merging (use `final-status-gate`).
+- Require conversation resolution before merge.
+- Restrict who can push directly to `main`.

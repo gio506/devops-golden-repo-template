@@ -3,9 +3,9 @@
 help: ## Show available targets
 	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z0-9_.-]+:.*##/ {printf "%-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-lint-markdown: ## Lint markdown files (requires markdownlint-cli)	
+lint-markdown: ## Lint markdown files (requires markdownlint-cli)
 	@if command -v markdownlint >/dev/null 2>&1; then \
-		markdownlint '**/*.md'; \
+		markdownlint --config .markdownlint.json '**/*.md'; \
 	else \
 		echo 'markdownlint not installed. Install: npm i -g markdownlint-cli'; \
 		exit 1; \
@@ -13,7 +13,7 @@ lint-markdown: ## Lint markdown files (requires markdownlint-cli)
 
 lint-yaml: ## Lint YAML files (requires yamllint)
 	@if command -v yamllint >/dev/null 2>&1; then \
-		yamllint .; \
+		yamllint -c .yamllint.yml .; \
 	else \
 		echo 'yamllint not installed. Install: pip install yamllint'; \
 		exit 1; \

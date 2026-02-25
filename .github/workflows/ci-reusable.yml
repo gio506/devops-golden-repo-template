@@ -3,10 +3,14 @@ name: Reusable DevOps Standards CI
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   markdown_lint:
     name: markdown-lint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,6 +23,7 @@ jobs:
   yaml_lint:
     name: yaml-lint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,16 +31,12 @@ jobs:
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: .
-          config_data: |
-            extends: default
-            rules:
-              line-length:
-                max: 160
-                level: warning
+          config_file: .yamllint.yml
 
   shellcheck:
     name: shellcheck
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -58,6 +59,7 @@ jobs:
   secret_scan:
     name: secret-scan-gitleaks
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -69,6 +71,7 @@ jobs:
   dependency_review:
     name: dependency-review
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       pull-requests: read
@@ -106,6 +109,7 @@ jobs:
   final_status:
     name: final-status-gate
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     if: always()
     needs:
       - markdown_lint

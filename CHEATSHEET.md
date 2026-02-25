@@ -9,8 +9,11 @@ Quick explanation of the key files in this template.
 - `docs/standards.md` → Commit style + branch + PR + CI standards.
 - `.editorconfig` → Editor formatting defaults.
 - `.gitignore` → Files Git should ignore.
+- `.markdownlint.json` → Markdown lint rules used by local and CI checks.
+- `.yamllint.yml` → YAML lint rules used by local and CI checks.
 - `Makefile` → Common local commands for checks.
 - `.github/workflows/ci-reusable.yml` → Reusable CI pipeline (`workflow_call`).
+- `.github/workflows/ci.yml` → Caller workflow so this repo validates itself on PR/push.
 - `LICENSE` → Usage and distribution rights.
 
 ## Fast path for a new maintainer

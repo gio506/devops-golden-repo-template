@@ -1,0 +1,8 @@
+# Default owners for all files
+* @your-org/devops-team
+
+# Docs ownership
+/docs/ @your-org/devops-team @your-org/platform-docs
+
+# Workflow ownership
+/.github/workflows/ @your-org/devops-team

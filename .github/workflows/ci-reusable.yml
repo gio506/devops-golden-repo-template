@@ -1,0 +1,118 @@
+name: Reusable DevOps Standards CI
+
+on:
+  workflow_call:
+
+jobs:
+  markdown_lint:
+    name: markdown-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: |
+            **/*.md
+
+  yaml_lint:
+    name: yaml-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Lint YAML
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+          config_data: |
+            extends: default
+            rules:
+              line-length:
+                max: 160
+                level: warning
+
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Detect shell scripts
+        id: detect
+        run: |
+          if git ls-files '*.sh' | grep -q .; then
+            echo "has_shell=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_shell=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Run ShellCheck
+        if: steps.detect.outputs.has_shell == 'true'
+        uses: ludeeus/action-shellcheck@2.0.0
+      - name: No shell scripts found
+        if: steps.detect.outputs.has_shell != 'true'
+        run: echo "No shell scripts found. Skipping shellcheck."
+
+  secret_scan:
+    name: secret-scan-gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependency_review:
+    name: dependency-review
+    runs-on: ubuntu-latest
+    if: ${{ hashFiles('**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock', '**/requirements.txt', '**/requirements*.txt', '**/poetry.lock', '**/Pipfile.lock', '**/go.sum', '**/Cargo.lock', '**/pom.xml', '**/build.gradle*') != '' }}
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+
+  final_status:
+    name: final-status-gate
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - markdown_lint
+      - yaml_lint
+      - shellcheck
+      - secret_scan
+      - dependency_review
+    steps:
+      - name: Aggregate job results
+        env:
+          MARKDOWN: ${{ needs.markdown_lint.result }}
+          YAML: ${{ needs.yaml_lint.result }}
+          SHELL: ${{ needs.shellcheck.result }}
+          SECRETS: ${{ needs.secret_scan.result }}
+          DEPS: ${{ needs.dependency_review.result }}
+        run: |
+          echo "markdown_lint=$MARKDOWN"
+          echo "yaml_lint=$YAML"
+          echo "shellcheck=$SHELL"
+          echo "secret_scan=$SECRETS"
+          echo "dependency_review=$DEPS"
+
+          failed=0
+          for result in "$MARKDOWN" "$YAML" "$SHELL" "$SECRETS" "$DEPS"; do
+            if [ "$result" = "failure" ] || [ "$result" = "cancelled" ]; then
+              failed=1
+            fi
+          done
+
+          if [ "$failed" -eq 1 ]; then
+            echo "One or more required CI stages failed."
+            exit 1
+          fi
+
+          echo "All CI stages completed successfully (or were legitimately skipped)."

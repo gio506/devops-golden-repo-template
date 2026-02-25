@@ -2,20 +2,17 @@
 
 A reusable **golden repository template** for teams that want consistent standards, clear contribution rules, and strong CI checks from day one.
 
+## Idea of this repository (short)
+
+Create every new DevOps project from the same high-quality baseline so onboarding, security, and CI quality are consistent across teams.
+
 ## What this template gives you
 
 - Core repository governance files (`CONTRIBUTING`, `SECURITY`, `CODEOWNERS`, `LICENSE`).
-- Basic editor and ignore defaults (`.editorconfig`, `.gitignore`).
+- Editor and Git defaults (`.editorconfig`, `.gitignore`).
 - DevOps standards documentation in `docs/standards.md`.
-- A reusable GitHub Actions workflow that can be called from other repos (`workflow_call`).
+- Reusable GitHub Actions workflow (`workflow_call`) and a caller workflow for this repo.
 - A simple `Makefile` with common contributor targets.
-
-## Quick start
-
-1. Click **Use this template** on GitHub.
-2. Update ownership details in `CODEOWNERS` and contact details in `SECURITY.md`.
-3. Adjust standards in `docs/standards.md` to match your team.
-4. Add app-specific dependency files later (the CI workflow auto-enables dependency review only when relevant manifests exist).
 
 ## Repository tree (with purpose)
 
@@ -23,10 +20,12 @@ A reusable **golden repository template** for teams that want consistent standar
 .
 ├── .editorconfig                  # Consistent formatting defaults across editors
 ├── .gitignore                     # Common files/folders to ignore in Git
+├── .markdownlint.json             # Markdown linting rules (shared local/CI behavior)
+├── .yamllint.yml                  # YAML linting rules (shared local/CI behavior)
 ├── .github/
 │   └── workflows/
-│       └── ci-reusable.yml        # Reusable CI pipeline via workflow_call
-├── .gitkeep                       # Placeholder file (safe to remove once repo has content)
+│       ├── ci-reusable.yml        # Reusable CI pipeline via workflow_call
+│       └── ci.yml                 # Local caller workflow (runs on PR/push)
 ├── CHEATSHEET.md                  # Fast reference: what each key file is for
 ├── CODEOWNERS                     # Review ownership mapping for paths
 ├── CONTRIBUTING.md                # Contributor workflow, setup, and PR expectations
@@ -40,7 +39,7 @@ A reusable **golden repository template** for teams that want consistent standar
 
 ## CI workflow stages
 
-The reusable workflow includes the following stages:
+The reusable workflow includes six stages:
 
 1. Markdown lint
 2. YAML lint
@@ -49,7 +48,7 @@ The reusable workflow includes the following stages:
 5. Dependency review (only if dependency manifests exist)
 6. Final status aggregator (single pass/fail gate)
 
-## How to call this reusable workflow from another workflow
+## How to call reusable CI from another repository
 
 ```yaml
 name: ci
@@ -61,7 +60,7 @@ on:
 
 jobs:
   standards:
-    uses: ./.github/workflows/ci-reusable.yml
+    uses: org/repo/.github/workflows/ci-reusable.yml@main
 ```
 
 ## Local commands
@@ -75,4 +74,4 @@ make scan-secrets
 make ci-local
 ```
 
-> Note: Some commands rely on tools installed on your machine (or Docker).
+> Note: Some commands rely on tools installed on your machine.

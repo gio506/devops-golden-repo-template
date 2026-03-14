@@ -95,3 +95,16 @@ Each PR should include:
 - require required status checks
 - require conversation resolution
 - require CODEOWNERS reviews when appropriate
+
+## 9. Official Documentation To Prefer
+
+When improving a repo from this template, prefer the official docs first:
+
+- GitHub Actions: workflow syntax, reusable workflows, job dependencies
+- Docker: Dockerfile best practices and image build guidance
+- Terraform: style guide, module structure, and validate or fmt workflow
+- Kubernetes: Kustomize overlays, manifests, and workload validation
+- Ansible: role layout, playbook structure, and idempotent task design
+
+Then simplify the implementation until it stays understandable for a Junior+
+portfolio repo.

@@ -64,6 +64,20 @@ For Junior+ repos, aim for 4 to 6 stages:
 
 This template provides the reusable standards pipeline. Each project repo should extend it with its own domain checks.
 
+## Official Reference Sources Behind This Template
+
+This template is aligned to the official guidance for the tools used in the
+portfolio:
+
+- GitHub Actions workflow syntax and job orchestration
+- Docker image build and Dockerfile best practices
+- Terraform module structure and validation
+- Kubernetes manifest and Kustomize organization
+- Ansible role structure and playbook practices
+
+Keep the repo simple, but when you upgrade a project, prefer the official docs
+first and then adapt the examples to the smallest learning-friendly version.
+
 ## Repository Tree
 
 ```text

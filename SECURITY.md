@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-This template supports the latest `main` branch.
+This template supports the latest `main` branch and the active `dev` branch.
 
 ## Reporting a vulnerability
 
@@ -12,7 +12,8 @@ Instead:
 
 1. Email: `security@example.com`
 2. Include steps to reproduce and impact assessment.
-3. Provide any known mitigations.
+3. State whether the issue affects the reusable workflow, docs, or governance defaults.
+4. Provide any known mitigations.
 
 ## Response targets
 

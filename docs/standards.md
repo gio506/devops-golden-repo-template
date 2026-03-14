@@ -1,65 +1,88 @@
 # DevOps Repository Standards
 
-This document defines baseline standards for repositories created from this template.
+This template is designed for portfolio and learning repos that still follow a professional workflow.
 
-## 1) Commit style
+## 1. Branch Strategy
 
-Use **Conventional Commits**:
+- Permanent branches:
+  - `main`: protected, merge-only
+  - `dev`: active integration branch
+- Normal workflow:
+  - branch from `dev`
+  - commit in small focused steps
+  - open PR into `dev` if needed
+  - merge `dev` into `main` through PR when ready
 
-- `feat:` new functionality
-- `fix:` bug fixes
-- `docs:` documentation updates
-- `chore:` maintenance changes
-- `ci:` CI/CD updates
-- `refactor:` internal code changes without behavior change
+For small solo repos, direct work on `dev` is acceptable, but `main` should still stay protected.
 
-Examples:
+## 2. Commit Style
 
-- `feat: add reusable CI workflow`
-- `docs: clarify branch naming policy`
-- `ci: add gitleaks scanning stage`
+Prefer short, readable commit messages:
+- `Add alert rule checks`
+- `Fix Debian nginx smoke test`
+- `Modularize VPC layout`
+- `Add Redis sidecar flow`
 
-## 2) Branch policy
+Conventional prefixes are acceptable, but clarity is more important than strict format.
 
-- Protected branch: `main`
-- No direct pushes to `main` (except emergency by maintainers)
-- Changes must come through Pull Requests
-- At least one code-owner review is required
-- All required CI checks must pass before merge
+## 3. Required Repo Files
 
-Recommended branch naming:
+Every repo created from this template should keep:
+- `README.md`
+- `CHEATSHEET.md`
+- `FILES_EXPLAINED.md`
+- `.github/workflows/*`
+- `docs/standards.md`
 
-- `feat/<topic>`
-- `fix/<topic>`
-- `docs/<topic>`
-- `chore/<topic>`
+Add these when relevant:
+- `scripts/smoke.sh`
+- `scripts/verify.sh`
+- `.pre-commit-config.yaml`
+- domain-specific docs such as `CHANGELOG.md`, `RELEASE.md`, or environment notes
 
-## 3) Pull request expectations
+## 4. README Expectations
+
+Every README should answer:
+- what the repo does
+- what files matter
+- how to run it locally
+- how to verify it
+- how to clean it up
+- what usually fails first
+
+## 5. CI Expectations
+
+Project CI should use 4 to 6 clear stages.
+
+Good examples from the portfolio:
+- lint -> validate -> test -> build
+- lint -> config validate -> stack up -> smoke -> verify -> cleanup
+- fmt -> validate -> lint -> plan
+- lint -> cluster create -> deploy -> rollout -> smoke -> cleanup
+
+Avoid giant single-job workflows when separate stages make failures easier to understand.
+
+## 6. PR Expectations
 
 Each PR should include:
+- what changed
+- why it changed
+- how it was checked locally
+- what CI stages should prove
+- risk or rollback notes if behavior changed
 
-- Clear summary of change and reason
-- Risk/impact notes
-- Testing evidence (command output or CI link)
-- Rollback notes if relevant
+## 7. Repository Quality Rules
 
-## 4) CI standards baseline
+- keep scripts non-destructive by default
+- document prerequisites explicitly
+- prefer one obvious command path for local verification
+- add troubleshooting for the most likely failure
+- keep examples realistic but small
 
-Every repository should include checks for:
+## 8. GitHub Settings To Enforce
 
-1. Markdown lint
-2. YAML lint
-3. Shell script lint (when scripts exist)
-4. Secret scanning
-5. Dependency review (when app dependencies exist)
-6. Final status aggregation gate
-
-## 5) GitHub settings to enforce
-
-Recommended repository settings (aligned with GitHub best practices):
-
-- Enable branch protection for `main`.
-- Require pull requests before merging.
-- Require status checks to pass before merging (use `final-status-gate`).
-- Require conversation resolution before merge.
-- Restrict who can push directly to `main`.
+- protect `main`
+- require pull requests before merge
+- require required status checks
+- require conversation resolution
+- require CODEOWNERS reviews when appropriate

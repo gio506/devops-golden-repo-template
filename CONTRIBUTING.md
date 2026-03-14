@@ -1,16 +1,19 @@
 # Contributing Guide
 
-Thanks for contributing! This template is designed to stay simple, consistent, and easy for beginners.
+Thanks for contributing. This template is meant to stay practical, teach good habits, and remain usable across Terraform, Docker, Kubernetes, CI/CD, Bash, and monitoring repos.
 
 ## 1) Before you start
 
 - Read `README.md` for repository purpose.
-- Read `docs/standards.md` for branch and commit rules.
+- Read `docs/standards.md` for branch and CI rules.
+- Read `docs/template-checklist.md` before creating a new repo from this template.
 - Open an issue for major changes before implementation.
 
 ## 2) Branch strategy
 
-- Create feature branches from `main`.
+- Do not work directly on `main`.
+- Create feature branches from `dev`.
+- Merge finished work into `dev`, then open PRs from `dev` to `main`.
 - Use branch names like:
   - `feat/<short-description>`
   - `fix/<short-description>`
@@ -19,11 +22,11 @@ Thanks for contributing! This template is designed to stay simple, consistent, a
 
 ## 3) Commit style
 
-Use Conventional Commits:
+Use short, readable commit messages:
 
-- `feat: add reusable workflow template`
-- `fix: correct shellcheck stage condition`
-- `docs: improve standards examples`
+- `Add reusable workflow template`
+- `Fix shellcheck stage condition`
+- `Improve standards examples`
 
 ## 4) Pull request checklist
 
@@ -31,6 +34,7 @@ Use Conventional Commits:
 - [ ] Changes are documented (README/docs if needed).
 - [ ] Security impact is considered.
 - [ ] PR description includes what changed and why.
+- [ ] Required repo files still exist (`README`, `CHEATSHEET`, `FILES_EXPLAINED`).
 
 ## 5) Code review expectations
 

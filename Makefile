@@ -1,7 +1,16 @@
-.PHONY: help lint-markdown lint-yaml lint-shell scan-secrets ci-local
+.PHONY: help structure-check lint-markdown lint-yaml lint-shell scan-secrets ci-local
 
 help: ## Show available targets
 	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z0-9_.-]+:.*##/ {printf "%-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+structure-check: ## Ensure required repo files exist
+	@test -f README.md
+	@test -f CHEATSHEET.md
+	@test -f FILES_EXPLAINED.md
+	@test -f docs/standards.md
+	@test -f docs/template-checklist.md
+	@test -f .github/workflows/ci.yml
+	@test -f .github/workflows/ci-reusable.yml
 
 lint-markdown: ## Lint markdown files (requires markdownlint-cli)
 	@if command -v markdownlint >/dev/null 2>&1; then \
@@ -40,4 +49,4 @@ scan-secrets: ## Run gitleaks scan (requires gitleaks)
 		exit 1; \
 	fi
 
-ci-local: lint-markdown lint-yaml lint-shell scan-secrets ## Run all local checks
+ci-local: structure-check lint-markdown lint-yaml lint-shell scan-secrets ## Run all local checks

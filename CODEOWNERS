@@ -6,3 +6,8 @@
 
 # Workflow ownership
 /.github/workflows/ @your-org/devops-team
+
+# Governance files
+/README.md @your-org/devops-team
+/CONTRIBUTING.md @your-org/devops-team
+/SECURITY.md @your-org/devops-team

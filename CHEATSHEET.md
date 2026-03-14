@@ -1,24 +1,39 @@
 # Golden Repo Cheatsheet
 
-Quick explanation of the key files in this template.
+## Bootstrap a new repo from this template
 
-- `README.md` → Project overview and getting-started instructions.
-- `CONTRIBUTING.md` → Rules and steps for contributors.
-- `CODEOWNERS` → Who must review specific paths.
-- `SECURITY.md` → How to report vulnerabilities safely.
-- `docs/standards.md` → Commit style + branch + PR + CI standards.
-- `.editorconfig` → Editor formatting defaults.
-- `.gitignore` → Files Git should ignore.
-- `.markdownlint.json` → Markdown lint rules used by local and CI checks.
-- `.yamllint.yml` → YAML lint rules used by local and CI checks.
-- `Makefile` → Common local commands for checks.
-- `.github/workflows/ci-reusable.yml` → Reusable CI pipeline (`workflow_call`).
-- `.github/workflows/ci.yml` → Caller workflow so this repo validates itself on PR/push.
-- `LICENSE` → Usage and distribution rights.
+1. Create `dev` from `main`
+2. Update `README.md`
+3. Update `CODEOWNERS`
+4. Update `SECURITY.md`
+5. Fill in `FILES_EXPLAINED.md`
+6. Add repo-specific workflow stages
 
-## Fast path for a new maintainer
+## Local checks
 
-1. Set your real owners in `CODEOWNERS`.
-2. Replace the security contact in `SECURITY.md`.
-3. Tune `docs/standards.md` to match team process.
-4. Enable branch protection and require CI checks.
+```bash
+make help
+make structure-check
+make lint-markdown
+make lint-yaml
+make lint-shell
+make scan-secrets
+make ci-local
+```
+
+## Key files
+
+- `README.md` -> repo overview, run, verify, cleanup, troubleshooting
+- `CHEATSHEET.md` -> short command reference
+- `FILES_EXPLAINED.md` -> file-by-file map
+- `docs/standards.md` -> branch, commit, PR, and CI rules
+- `docs/template-checklist.md` -> checklist for repos created from the template
+- `.github/workflows/ci-reusable.yml` -> reusable standards pipeline
+- `.github/workflows/ci.yml` -> caller workflow
+- `.github/PULL_REQUEST_TEMPLATE.md` -> PR checklist
+
+## Branch protection
+
+- protect `main`
+- use `dev -> main`
+- require CI before merge

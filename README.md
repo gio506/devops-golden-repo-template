@@ -5,6 +5,7 @@ A Junior+ template for DevOps portfolio projects that need a clean `dev -> main`
 ## What This Template Can Be
 
 Use this template as the starting point for:
+
 - Terraform labs
 - Docker and Compose labs
 - Kubernetes starter repos
@@ -17,6 +18,7 @@ This template is not the final application pipeline. It is the **governance and 
 ## What We Learned From The Other 14 Repos
 
 Across the portfolio, the strongest repos shared the same patterns:
+
 - Clear `main` and `dev` branch flow
 - Small, explicit CI stages instead of one big job
 - A `README.md` with local run, verify, and cleanup steps
@@ -26,6 +28,7 @@ Across the portfolio, the strongest repos shared the same patterns:
 - Troubleshooting notes for the most likely failure mode
 
 The weaker patterns were also obvious:
+
 - CI failed when checks were too brittle
 - Docs explained the tool but not the repo workflow
 - Important files existed but their purpose was not obvious
@@ -36,6 +39,7 @@ This template is optimized to fix those problems first.
 ## Golden Repo Checklist
 
 Every new repo created from this template should keep or add:
+
 1. `main` and `dev` branches
 2. Pull requests from `dev` into `main`
 3. A `README.md` with repo map, run, verify, cleanup, and troubleshooting
@@ -48,6 +52,7 @@ Every new repo created from this template should keep or add:
 ## Recommended Pipeline Shape
 
 For Junior+ repos, aim for 4 to 6 stages:
+
 1. Structure or docs check
 2. Lint or syntax validation
 3. Repo-specific validation
@@ -99,6 +104,7 @@ make ci-local
 ## Reusable CI
 
 The reusable workflow intentionally focuses on **repo hygiene**:
+
 - required files
 - markdown lint
 - YAML lint
@@ -111,6 +117,7 @@ Then each actual project adds its own runtime or domain workflow on top of that 
 ## Branch Protection
 
 Recommended GitHub settings:
+
 - protect `main`
 - require pull requests before merge
 - require the final CI status gate

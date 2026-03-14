@@ -5,9 +5,12 @@ This template is designed for portfolio and learning repos that still follow a p
 ## 1. Branch Strategy
 
 - Permanent branches:
+
   - `main`: protected, merge-only
   - `dev`: active integration branch
+
 - Normal workflow:
+
   - branch from `dev`
   - commit in small focused steps
   - open PR into `dev` if needed
@@ -18,6 +21,7 @@ For small solo repos, direct work on `dev` is acceptable, but `main` should stil
 ## 2. Commit Style
 
 Prefer short, readable commit messages:
+
 - `Add alert rule checks`
 - `Fix Debian nginx smoke test`
 - `Modularize VPC layout`
@@ -28,6 +32,7 @@ Conventional prefixes are acceptable, but clarity is more important than strict 
 ## 3. Required Repo Files
 
 Every repo created from this template should keep:
+
 - `README.md`
 - `CHEATSHEET.md`
 - `FILES_EXPLAINED.md`
@@ -35,6 +40,7 @@ Every repo created from this template should keep:
 - `docs/standards.md`
 
 Add these when relevant:
+
 - `scripts/smoke.sh`
 - `scripts/verify.sh`
 - `.pre-commit-config.yaml`
@@ -43,6 +49,7 @@ Add these when relevant:
 ## 4. README Expectations
 
 Every README should answer:
+
 - what the repo does
 - what files matter
 - how to run it locally
@@ -55,6 +62,7 @@ Every README should answer:
 Project CI should use 4 to 6 clear stages.
 
 Good examples from the portfolio:
+
 - lint -> validate -> test -> build
 - lint -> config validate -> stack up -> smoke -> verify -> cleanup
 - fmt -> validate -> lint -> plan
@@ -65,6 +73,7 @@ Avoid giant single-job workflows when separate stages make failures easier to un
 ## 6. PR Expectations
 
 Each PR should include:
+
 - what changed
 - why it changed
 - how it was checked locally

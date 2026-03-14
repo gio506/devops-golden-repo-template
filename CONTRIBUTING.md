@@ -15,6 +15,7 @@ Thanks for contributing. This template is meant to stay practical, teach good ha
 - Create feature branches from `dev`.
 - Merge finished work into `dev`, then open PRs from `dev` to `main`.
 - Use branch names like:
+
   - `feat/<short-description>`
   - `fix/<short-description>`
   - `docs/<short-description>`

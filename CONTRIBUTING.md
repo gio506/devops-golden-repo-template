@@ -1,19 +1,23 @@
 # Contributing Guide
 
-Thanks for contributing. This template is meant to stay practical, teach good habits, and remain usable across Terraform, Docker, Kubernetes, CI/CD, Bash, and monitoring repos.
+Thanks for contributing. This template is meant to stay practical,
+teach good habits, and remain usable across Terraform, Docker,
+Kubernetes, CI/CD, Bash, and monitoring repos.
 
 ## 1) Before you start
 
 - Read `README.md` for repository purpose.
 - Read `docs/standards.md` for branch and CI rules.
-- Read `docs/template-checklist.md` before creating a new repo from this template.
+- Read `docs/template-checklist.md` before creating a new repo
+  from this template.
 - Open an issue for major changes before implementation.
 
 ## 2) Branch strategy
 
 - Do not work directly on `main`.
 - Create feature branches from `dev`.
-- Merge finished work into `dev`, then open PRs from `dev` to `main`.
+- Merge finished work into `dev`, then open PRs from `dev`
+  to `main`.
 - Use branch names like:
 
   - `feat/<short-description>`
@@ -35,7 +39,8 @@ Use short, readable commit messages:
 - [ ] Changes are documented (README/docs if needed).
 - [ ] Security impact is considered.
 - [ ] PR description includes what changed and why.
-- [ ] Required repo files still exist (`README`, `CHEATSHEET`, `FILES_EXPLAINED`).
+- [ ] Required repo files still exist
+  (`README`, `CHEATSHEET`, `FILES_EXPLAINED`).
 
 ## 5) Code review expectations
 

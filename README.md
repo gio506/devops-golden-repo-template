@@ -1,6 +1,8 @@
 # DevOps Golden Repo Template
 
-A Junior+ template for DevOps portfolio projects that need a clean `dev -> main` workflow, consistent docs, and a standards-first CI baseline before project-specific checks are added.
+A Junior+ template for DevOps portfolio projects that need a clean
+`dev -> main` workflow, consistent docs, and a standards-first CI
+baseline before project-specific checks are added.
 
 ## What This Template Can Be
 

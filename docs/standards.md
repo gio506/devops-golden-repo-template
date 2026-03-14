@@ -5,16 +5,14 @@ This template is designed for portfolio and learning repos that still follow a p
 ## 1. Branch Strategy
 
 - Permanent branches:
-
-  - `main`: protected, merge-only
-  - `dev`: active integration branch
+- `main`: protected, merge-only
+- `dev`: active integration branch
 
 - Normal workflow:
-
-  - branch from `dev`
-  - commit in small focused steps
-  - open PR into `dev` if needed
-  - merge `dev` into `main` through PR when ready
+- branch from `dev`
+- commit in small focused steps
+- open PR into `dev` if needed
+- merge `dev` into `main` through PR when ready
 
 For small solo repos, direct work on `dev` is acceptable, but `main` should still stay protected.
 
